@@ -1,0 +1,321 @@
+---
+title: "R Workflow Mx analysis"
+output: html_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+### Load necessary libraries and scripts
+```{r message=FALSE}
+
+#Load necessary libraries
+library(Biobase)
+library(tidyverse)
+library(FactoMineR)
+library(factoextra)
+library(reshape2)
+library(rstatix)
+library(ggpubr)
+
+```
+
+### Functions
+
+```{r}
+
+#Function performs a number of string replacement based on regular expression
+replace_values <- function(object, replace_list) {
+  
+  for(pair in replace_list) {
+    object <- gsub(pair[1], pair[2], object)
+  }
+  return(object)
+}
+
+
+#Function selects subsets of metabolites based on regular expression
+getMetabolitesByRegex <- function(matrix, regexpr) {
+  columns_to_sum <- colnames(matrix)[grepl(regexpr, colnames(matrix))]
+  return(columns_to_sum)
+}
+
+
+#Function adds up the concentrations of metabolites based on ragular expression
+sumMetabolitesByRegex <- function(matrix, regexpr) {
+  
+  #identify metabolites that match the pattern
+  columns_to_sum <- getMetabolitesByRegex(matrix, regexpr)
+  
+  #print(columns_to_sum)
+  summed_values = list()
+  
+  #iterate over metabolites and add them together
+  for(col in columns_to_sum) {
+    
+    #the first iteration intitializes the list, the rest adds to it
+    if(length(summed_values) != 0) {
+      summed_values <- summed_values + as.list(matrix[col])[[1]]
+    } else {
+      summed_values <- as.list(matrix[col])[[1]]
+    }
+  }
+  return(summed_values)
+}
+
+# This function iterates over the metabolites and sums up concentrations based on given classes
+groupByClass <- function(class_name) {
+  
+  group_frame <- data.frame(row.names = rownames(mx_raw))
+  
+  for(feature in rownames(meta)) {
+    #get group of this metabolite
+    group <- meta[feature, class_name] %>% as.character()
+    
+    #skip if group contains only this metabolite
+    #if(nrow(meta[meta$subclass == group, ]) < 2) { print(paste(group, " only exists once")); next}
+    
+    #check if group exists already in table
+    if(group %in% colnames(group_frame)) {
+      group_frame[group] <- group_frame[group] + as.numeric(mx_raw[, feature])
+      #print(paste("add", feature))
+    } else {
+      group_frame[[group]] <- as.numeric(mx_raw[, feature])
+      #print(paste("create", group, "and add", feature))
+    }
+  }
+  return(group_frame)
+}
+
+```
+
+
+### Load data
+
+Data is divided in 
+
+* information on the features (metabolites)
+* information on the samples (grouping)
+* the measured data (already normalized and transformed in Perseus)
+
+
+```{r}
+
+# read the data files
+matrix = read.table("data/Mx_matrix.txt", header = TRUE, sep = "\t", as.is = TRUE, row.names = 1) %>% as.matrix()
+features = read.table("data/Mx_features.txt", header = TRUE, sep = "\t", row.names = 1, stringsAsFactors = TRUE)
+samples = read.table("data/Mx_samples.txt", header = TRUE, sep = "\t", row.names = 1, stringsAsFactors = TRUE)
+
+# preprocess the data: rename samples for clarity
+replace_list_general <- list(
+  c("TH1.PDL1.LAG3", "Combined"),
+  c("PDL1.LAG3", "CPI"),
+  c("TH1", "Th1")
+)
+
+colnames(matrix) <- colnames(matrix) %>% replace_values(replace_list_general)
+rownames(samples) <- rownames(samples) %>% replace_values(replace_list_general)
+
+
+# more preprocessing: set order of treatment groups so they appear chronologically in graphs etc.
+samples$group <- samples$group %>% factor(ordered = TRUE, levels = c("ISO", "CPI", "Th1", "Combined"))
+
+mx_set <- ExpressionSet(assayData = matrix, featureData = AnnotatedDataFrame(features), phenoData = AnnotatedDataFrame(samples))
+
+
+```
+
+
+### Run PCA
+
+```{r}
+
+# size of labels of individual points
+labelSize = 3
+
+# Run PCA on data. 
+#   scale.unit: aditional scaling of the contributions. Falso shows outliers of strongly contributing features
+#   ncp: output only first 3 dimensions
+res.pca <- PCA(t(exprs(mx_set)), scale.unit=FALSE, ncp=3, graph=FALSE)
+
+#show scree plot
+fviz_eig(res.pca, addlabels = TRUE)
+
+#show score plot
+fviz_pca_ind(res.pca, title="PCA score plot", geom.ind = list("point", "text"), pointshape=15, labelsize=labelSize, repel=TRUE, habillage=pData(mx_set)$group, addEllipses = TRUE, ellipse.type = "confidence", ellipse.level=0.95, mean.point = FALSE, legend.title="Treatment groups")
+ggsave("data/Mx_score_plot.pdf", width=5, height=5, units="in") 
+
+#show loading plot
+fviz_pca_var(res.pca, title="PCA loading plot (top50)", geom.var = list("arrow", "text"), labelsize=labelSize, col.var = fData(mx_set)$class, repel=TRUE, select.var=list("contrib"=50), legend.title="Metabolite groups")
+
+#clearer loading plot that only distinguishes metabolite classes
+fviz_pca_var(res.pca, title = "PCA loading plot", geom.var = list("point"), labelsize=labelSize, col.var = fData(mx_set)$class, legend.title="Metabolite groups")
+ggsave("data/Mx_loading_plot.pdf", width=5, height=5, units="in") 
+
+#Extra loading plot for comparison of PC and LPC species
+PC_species <- getMetabolitesByRegex(t(fData(mx_set)), "PC")
+PC_groups <- fData(mx_set)$subclass %>% replace_values(list(c("^PC a.", "PC"))) %>% factor(levels=c("Lyso-PC", "PC"))
+
+fviz_pca_var(res.pca, title="PCA loading plot", geom.var = list("point"), labelsize=labelSize, legend.title="PC species", select.var = list(name = PC_species), col.var = PC_groups)
+ggsave("data/Mx_loading_PC.pdf", width=5, height=5, units="in") 
+
+
+```
+
+
+### Closer comparisons of metabolite groups
+
+The raw concentrations are used to compare different groups of metabolites. For lipids, different sizes and degrees of desaturation.
+
+```{r}
+
+# in order to perform addition on data, log-transformation has to be reversed. Matrix is transposed to profit from quick access with dollar sign
+mx_raw <- 2^exprs(mx_set) %>% t() %>% as.data.frame() 
+
+# first create metabolite groups based on the given classes
+meta = fData(mx_set)
+
+#execute function that sums up metabolite concentrations based on existing groups
+mx_groups = cbind(groupByClass("subclass"), groupByClass("subsubclass"))
+
+#compute specific groups of metabolites
+mx_groups[["essent.AA"]] <- mx_raw$Leu + mx_raw$Phe + mx_raw$Met + mx_raw$Lys + mx_raw$Ile + mx_raw$Val + mx_raw$Thr + mx_raw$Trp
+mx_groups[["non.essent.AA"]] <- mx_raw$Ala + mx_raw$Arg + mx_raw$Asn + mx_raw$Asp + mx_raw$Gln + mx_raw$Glu + mx_raw$Gly + mx_raw$His + mx_raw$Pro + mx_raw$Ser + mx_raw$Tyr + mx_raw$Cit + mx_raw$Orn
+mx_groups[["AAs"]] <- mx_groups$essent.AA + mx_groups$non.essent.AA
+mx_groups[["Acylcarnitines"]] <- mx_groups$`Short Chain Acylcarnitines` + mx_groups$`Medium Chain Acylcarnitines` + mx_groups$`Long Chain Acylcarnitines` 
+mx_groups[["PC"]] <- mx_groups$`PC aa` + mx_groups$`PC ae`
+
+#compute ratios of metabolites
+mx_ratios = data.frame(row.names = rownames(mx_raw))
+
+mx_ratios[["Kyn.Trp.ratio"]] <- mx_raw$Kyn / mx_raw$Trp
+mx_ratios[["Acylcarnitines.ratio"]] <- mx_groups$Acylcarnitines / mx_groups$AAs
+mx_ratios[["ketogenic.AA.ratio"]] <- mx_groups$`Ketogenic AA` / mx_groups$AAs
+mx_ratios[["Orn.Arg.ratio"]] <- mx_raw$Orn / mx_raw$Arg
+mx_ratios[["lysoPC.smaller21.PC.ratio"]] <- (sumMetabolitesByRegex(mx_raw, "^lysoPC.a.C1") + sumMetabolitesByRegex(mx_raw, "^lysoPC.a.C20") ) / mx_groups$PC
+mx_ratios[["glucogenic.AA.ratio"]] <- mx_groups$`Glycogenic AA` / mx_groups$AAs
+
+```
+
+
+### Statistical analysis of metabolite groups
+
+```{r}
+
+# include sample groups for statistical analysis
+mx_table <- cbind(mx_ratios, group = pData(mx_set)$group)
+
+wanted_comparisons <- list(  
+  c("Combined", "ISO"), 
+  c("Combined", "Th1"),  
+  c("CPI", "ISO"), 
+  c("Th1", "ISO"),
+  c("Combined", "CPI"), 
+  c("Th1", "CPI") 
+)
+
+# The data is melted to get all data points into one column called "value". The respective ratio is listed in the "measurement" column
+melted_table <- melt(mx_table, id.vars=c("group"), variable.name = "measurement")
+
+# calculate statistic, correct for multiple testing
+statistic <- melted_table %>%
+  group_by(measurement) %>%
+  t_test(value ~ group, comparisons = wanted_comparisons) %>%
+  adjust_pvalue(method = "fdr")
+
+print(statistic)
+write.csv(statistic, "data/Mx_groups_statistics.csv")
+
+```
+
+### Plotting of metabolite ratios
+
+```{r}
+
+#Create custom labels for plots
+plot_names = c("Kynurenine/Tryptophan ratio", "Acylcarnitines/AAs", "Ketogenic AA/All AA ratio", "Ornithine/Arginine ratio", paste0("small lyso PC/PC ratio (", "<", "21C)"), "Glucogenic AA/All AA ratio")
+plot_labels <- setNames(plot_names, colnames(mx_ratios))
+
+# show different comparisons in the figure
+wanted_comparisons <- list(  
+  c("Combined", "ISO"), 
+  c("Combined", "Th1"),  
+  c("Combined", "CPI")
+)
+
+#Create graphs themselves
+p <- ggplot(data = melted_table, aes(x = group, y = value)) + labs(x="", y="") + theme(plot.margin = unit(c(0, 0, 0, 0), "mm"))
+p <- p + geom_point(color="black", shape=16) 
+p <- p + stat_summary(fun = mean, geom = "point", color = "red", shape=15, size = 3) + stat_summary(fun.data = mean_sd, geom = "errorbar", width=0.1)
+
+#Add statistics and facets
+p <- p + stat_compare_means(method = "t.test", p.value.adjust = "fdr", size = 2.5, comparisons = wanted_comparisons, hide.ns = TRUE)
+p <- p + facet_wrap(~measurement, labeller = as_labeller(plot_labels), scales = "free")
+
+#Add external x and y labels
+graph <- annotate_figure(p, left = text_grob("abundance ratio", rot = 90), bottom = text_grob("treatment group"))
+
+print(graph)
+ggsave("data/Mx_concentration_graphs.pdf", width=9, height=6, units="in") 
+```
+
+
+### Plotting phospholipids based on size and desaturation
+
+```{r}
+#Get all phosphatidylcholine features
+PC_only_list = getMetabolitesByRegex(mx_raw, "^PC aa")
+PC_only <- mx_raw[PC_only_list]
+
+#Normalize all features by their mean (per feature)
+for (col in 1:ncol(PC_only)) {
+    mean_per_feature = mean(PC_only[, col])
+    PC_only[, col] = sapply(PC_only[, col], function(x) x/mean_per_feature)
+  }
+
+#Extract number of carbons and double bonds from compound names
+carbons = sapply(PC_only_list, function(x) gsub(".*\\D+\\s.(\\d{1,2}).(\\d{1}).*", "\\1 C", x))
+bonds = sapply(PC_only_list, function(x) gsub(".*\\D+\\s.(\\d{1,2}).(\\d{1}).*", "\\2 db", x))
+
+#Combine with data
+PC_total = t(PC_only) %>% as.data.frame(stringsAsFactors = FALSE)
+PC_total <- cbind(carbons, bonds, PC_total)
+
+# Sum up all compounds of certain size and desaturation
+PC_unique = aggregate(PC_total[,3:(ncol(PC_total))], list("carbons"=PC_total$carbons, "bonds"=PC_total$bonds), sum)
+print(paste("Total number of compounds: ", nrow(PC_total), ", Unique per size and desaturation: ", nrow(PC_unique)))
+
+#Melt to get all datapoints into a single column. Add groups manually
+PC_melted = melt(PC_unique, id.vars=c("carbons", "bonds"))
+PC_melted <- gsub("\\.\\d", "", PC_melted$variable) %>% factor(levels = c("ISO", "CPI", "Th1", "Combined"), labels = c("ISO", "C", "T", "CT")) %>% cbind(group=., PC_melted)
+
+#Print graph with facet_grid to distribute different size and desaturation
+p = ggplot(PC_melted, aes(x=group, y=value)) + labs(x="treatment group", y="relative abundance (not true to scale)")
+p = p + stat_summary(fun="mean", geom="point", size=2) + stat_summary(fun.data = mean_sd, geom = "errorbar", width=0) 
+p = p + facet_grid(bonds~carbons, scales = "free") + ggtitle("Overview on abundance of PC aa species")
+p = p + theme(axis.text.y=element_blank(), axis.ticks.y=element_blank())
+
+print(p)
+ggsave("data/Mx_grid_PC.pdf", width=12, height=8, unit="in")
+```
+
+
+
+### Export for Metaboanalyst
+
+Further analysis is performed using the online-tool (Hierarchical clustering etc.)
+
+```{r}
+# Requirement: first line has sample names, second line group names, underneath the features
+metabo_table <- rbind(group = as.character(pData(mx_set)$group), exprs(mx_set)) %>% as.data.frame()
+
+write.csv(metabo_table, "data/Mx_normalised_transformed_concentrations.csv")
+```
+
+
+### R info
+
+```{r}
+sessionInfo()
+```
+
+

@@ -1,0 +1,177 @@
+ ssample	analysis_type	class	subclass	subsubclass	LOD	ULOQ	LLOQ
+C0	Quantitative	acylcarnitines	AC-small	Carnitine (free)	2.16	120	5
+C2	Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.12	35	0.4
+C3	Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.081	15	0.4
+C3-DC (C4-OH)	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.059	0	0
+C3-OH	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.06	0	0
+C3:1	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.07	0	0
+C4	Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.082	12	0.4
+C4:1	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.057	0	0
+C5	Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.131	12	0.4
+C5-DC (C6-OH)	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.057	0	0
+C5-M-DC	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.069	0	0
+C5-OH (C3-DC-M)	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.085	0	0
+C5:1	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.078	0	0
+C5:1-DC	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.075	0	0
+C6 (C4:1-DC)	Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.14	0	0
+C6:1	Relative Quantitative	acylcarnitines	AC-small	Short Chain Acylcarnitines	0.066	0	0
+C7-DC	Relative Quantitative	acylcarnitines	AC-small	Medium Chain Acylcarnitines	0.059	0	0
+C8	Quantitative	acylcarnitines	AC-small	Medium Chain Acylcarnitines	0.207	8	0.2
+C9	Relative Quantitative	acylcarnitines	AC-small	Medium Chain Acylcarnitines	0.153	0	0
+C10	Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.253	6	0.3
+C10:1	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.297	0	0
+C10:2	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.337	0	0
+C12	Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.178	12	0.4
+C12-DC	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.85	0	0
+C12:1	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.218	0	0
+C14	Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.118	6	0.4
+C14:1	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.054	0	0
+C14:1-OH	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.068	0	0
+C14:2	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.047	0	0
+C14:2-OH	Relative Quantitative	acylcarnitines	AC-large	Medium Chain Acylcarnitines	0.057	0	0
+C16	Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.093	12	0.4
+C16-OH	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.116	0	0
+C16:1	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.115	0	0
+C16:1-OH	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.052	0	0
+C16:2	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.054	0	0
+C16:2-OH	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.063	0	0
+C18	Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.062	6	0.4
+C18:1	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.089	0	0
+C18:1-OH	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.092	0	0
+C18:2	Relative Quantitative	acylcarnitines	AC-large	Long Chain Acylcarnitines	0.047	0	0
+Ala	Quantitative	aminoacids	aminoacids	Glycogenic AA	5.25	1600	20
+Arg	Quantitative	aminoacids	aminoacids	Glycogenic AA	0.5	400	5
+Asn	Quantitative	aminoacids	aminoacids	Glycogenic AA	1.5	400	5
+Asp	Quantitative with Restrictions	aminoacids	aminoacids	Glycogenic AA	1.5	400	5
+Cit	Quantitative	aminoacids	aminoacids	Citrulline	1	400	5
+Gln	Quantitative	aminoacids	aminoacids	Glycogenic AA	1.5	1600	20
+Glu	Quantitative	aminoacids	aminoacids	Glycogenic AA	2	800	10
+Gly	Quantitative	aminoacids	aminoacids	Glycogenic AA	1.59	2000	25
+His	Quantitative	aminoacids	aminoacids	Glycogenic AA	0.226	400	5
+Ile	Quantitative	aminoacids	aminoacids	Glycogenic/Ketogenic AA	0.5	400	5
+Leu	Quantitative	aminoacids	aminoacids	Ketogenic AA	1.5	400	50
+Lys	Quantitative	aminoacids	aminoacids	Ketogenic AA	0.5	800	10
+Met	Quantitative	aminoacids	aminoacids	Glycogenic AA	0.1	400	5
+Orn	Quantitative	aminoacids	aminoacids	Ornithine	0.5	400	5
+Phe	Quantitative	aminoacids	aminoacids	Glycogenic/Ketogenic AA	0.1	400	5
+Pro	Quantitative	aminoacids	aminoacids	Glycogenic AA	1.49	800	10
+Ser	Quantitative	aminoacids	aminoacids	Glycogenic AA	1	400	5
+Thr	Quantitative	aminoacids	aminoacids	Glycogenic/Ketogenic AA	0.945	400	5
+Trp	Quantitative	aminoacids	aminoacids	Glycogenic/Ketogenic AA	0.178	400	5
+Tyr	Quantitative	aminoacids	aminoacids	Glycogenic/Ketogenic AA	0.5	400	5
+Val	Quantitative	aminoacids	aminoacids	Glycogenic AA	1.25	800	10
+Ac-Orn	Quantitative with Restrictions	biogenic amines	biogenic amines	Biogenic amines	0.2	40	1
+ADMA	Quantitative with Restrictions	biogenic amines	biogenic amines	Biogenic amines	0.08	20	0.25
+alpha-AAA	Quantitative with Restrictions	biogenic amines	biogenic amines	Biogenic amines	0.4	80	1
+Carnosine	Quantitative	biogenic amines	biogenic amines	Biogenic amines	0.1	40	0.5
+Creatinine	Quantitative	biogenic amines	biogenic amines	Biogenic amines	0.281	800	10
+Histamine	Quantitative with Restrictions	biogenic amines	biogenic amines	Biogenic amines	0.01	80	1
+Kynurenine	Quantitative with Restrictions	biogenic amines	biogenic amines	Biogenic amines	0.105	80	1
+Met-SO	Quantitative	biogenic amines	biogenic amines	Biogenic amines	0.3	80	10
+Putrescine	Quantitative	biogenic amines	biogenic amines	Polyamines	0.02	8	0.1
+Sarcosine	Quantitative	biogenic amines	biogenic amines	Biogenic amines	0.3	80	1
+SDMA	Quantitative	biogenic amines	biogenic amines	Biogenic amines	0.03	8	0.1
+Serotonin	Quantitative	biogenic amines	biogenic amines	Biogenic amines	0.03	8	0.1
+Spermidine	Quantitative	biogenic amines	biogenic amines	Polyamines	0.363	20	0.25
+Spermine	Quantitative	biogenic amines	biogenic amines	Polyamines	0.08	20	0.25
+t4-OH-Pro	Not Validated	biogenic amines	biogenic amines	Biogenic amines	0.1	80	10
+lysoPC a C14:0	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	8.18	0	0
+lysoPC a C16:0	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.104	0	0
+lysoPC a C16:1	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.068	0	0
+lysoPC a C17:0	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.058	0	0
+lysoPC a C18:0	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.204	0	0
+lysoPC a C18:1	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.174	0	0
+lysoPC a C18:2	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.067	0	0
+lysoPC a C20:3	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.111	0	0
+lysoPC a C20:4	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.031	0	0
+lysoPC a C24:0	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.063	0	0
+lysoPC a C26:0	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.032	0	0
+lysoPC a C26:1	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.052	0	0
+lysoPC a C28:0	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.069	0	0
+lysoPC a C28:1	Relative Quantitative	lyso glycerophospholipids	Lyso-PC	Lyso-PC a	0.01	0	0
+PC aa C24:0	Relative Quantitative	glycerophospholipids	PC aa	PC aa Saturated	0.02	0	0
+PC aa C26:0	Relative Quantitative	glycerophospholipids	PC aa	PC aa Saturated	0.763	0	0
+PC aa C28:1	Relative Quantitative	glycerophospholipids	PC aa	PC aa Mono-Unsaturated	0.044	0	0
+PC aa C30:0	Relative Quantitative	glycerophospholipids	PC aa	PC aa Saturated	0.114	0	0
+PC aa C32:0	Relative Quantitative	glycerophospholipids	PC aa	PC aa Saturated	0	0	0
+PC aa C32:1	Relative Quantitative	glycerophospholipids	PC aa	PC aa Mono-Unsaturated	0.014	0	0
+PC aa C32:2	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.013	0	0
+PC aa C32:3	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.002	0	0
+PC aa C34:1	Relative Quantitative	glycerophospholipids	PC aa	PC aa Mono-Unsaturated	0.06	0	0
+PC aa C34:2	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.027	0	0
+PC aa C34:3	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.034	0	0
+PC aa C34:4	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.036	0	0
+PC aa C36:0	Relative Quantitative	glycerophospholipids	PC aa	PC aa Saturated	0.41	0	0
+PC aa C36:1	Relative Quantitative	glycerophospholipids	PC aa	PC aa Mono-Unsaturated	0.028	0	0
+PC aa C36:2	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.044	0	0
+PC aa C36:3	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.015	0	0
+PC aa C36:4	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.014	0	0
+PC aa C36:5	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.033	0	0
+PC aa C36:6	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.009	0	0
+PC aa C38:0	Relative Quantitative	glycerophospholipids	PC aa	PC aa Saturated	0.04	0	0
+PC aa C38:1	Relative Quantitative	glycerophospholipids	PC aa	PC aa Mono-Unsaturated	0.006	0	0
+PC aa C38:3	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.023	0	0
+PC aa C38:4	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.013	0	0
+PC aa C38:5	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.029	0	0
+PC aa C38:6	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.047	0	0
+PC aa C40:1	Relative Quantitative	glycerophospholipids	PC aa	PC aa Mono-Unsaturated	0.398	0	0
+PC aa C40:2	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.013	0	0
+PC aa C40:3	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.003	0	0
+PC aa C40:4	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.011	0	0
+PC aa C40:5	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.067	0	0
+PC aa C40:6	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.314	0	0
+PC aa C42:0	Relative Quantitative	glycerophospholipids	PC aa	PC aa Saturated	0.055	0	0
+PC aa C42:1	Relative Quantitative	glycerophospholipids	PC aa	PC aa Mono-Unsaturated	0.01	0	0
+PC aa C42:2	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.112	0	0
+PC aa C42:4	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.017	0	0
+PC aa C42:5	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.019	0	0
+PC aa C42:6	Relative Quantitative	glycerophospholipids	PC aa	PC aa Poly-Unsaturated	0.231	0	0
+PC ae C30:0	Relative Quantitative	glycerophospholipids	PC ae	PC ae Saturated	0.081	0	0
+PC ae C30:1	Relative Quantitative	glycerophospholipids	PC ae	PC ae Mono-Unsaturated	0.006	0	0
+PC ae C30:2	Relative Quantitative	glycerophospholipids	PC ae	PC aa Poly-Unsaturated	0.008	0	0
+PC ae C32:1	Relative Quantitative	glycerophospholipids	PC ae	PC ae Mono-Unsaturated	0.007	0	0
+PC ae C32:2	Relative Quantitative	glycerophospholipids	PC ae	PC aa Poly-Unsaturated	0.114	0	0
+PC ae C34:0	Relative Quantitative	glycerophospholipids	PC ae	PC ae Saturated	0.022	0	0
+PC ae C34:1	Relative Quantitative	glycerophospholipids	PC ae	PC ae Mono-Unsaturated	0.022	0	0
+PC ae C34:2	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.009	0	0
+PC ae C34:3	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.009	0	0
+PC ae C36:0	Relative Quantitative	glycerophospholipids	PC ae	PC ae Saturated	0.132	0	0
+PC ae C36:1	Relative Quantitative	glycerophospholipids	PC ae	PC ae Mono-Unsaturated	0.306	0	0
+PC ae C36:2	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.041	0	0
+PC ae C36:3	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.004	0	0
+PC ae C36:4	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.02	0	0
+PC ae C36:5	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.012	0	0
+PC ae C38:0	Relative Quantitative	glycerophospholipids	PC ae	PC ae Saturated	0.099	0	0
+PC ae C38:1	Relative Quantitative	glycerophospholipids	PC ae	PC ae Mono-Unsaturated	0.012	0	0
+PC ae C38:2	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.007	0	0
+PC ae C38:3	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.047	0	0
+PC ae C38:4	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.027	0	0
+PC ae C38:5	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.123	0	0
+PC ae C38:6	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.019	0	0
+PC ae C40:1	Relative Quantitative	glycerophospholipids	PC ae	PC ae Mono-Unsaturated	0.015	0	0
+PC ae C40:2	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.018	0	0
+PC ae C40:3	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.017	0	0
+PC ae C40:4	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.069	0	0
+PC ae C40:5	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.004	0	0
+PC ae C40:6	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.013	0	0
+PC ae C42:0	Relative Quantitative	glycerophospholipids	PC ae	PC ae Saturated	1.02	0	0
+PC ae C42:1	Relative Quantitative	glycerophospholipids	PC ae	PC ae Mono-Unsaturated	0.353	0	0
+PC ae C42:2	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.02	0	0
+PC ae C42:3	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.013	0	0
+PC ae C42:5	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.69	0	0
+PC ae C44:3	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.066	0	0
+PC ae C44:4	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.092	0	0
+PC ae C44:5	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.143	0	0
+PC ae C44:6	Relative Quantitative	glycerophospholipids	PC ae	PC ae Poly-Unsaturated	0.06	0	0
+SM (OH) C14:1	Relative Quantitative	sphingolipids	sphingolipids	SM (OH)	0.191	0	0
+SM (OH) C16:1	Relative Quantitative	sphingolipids	sphingolipids	SM (OH)	0.004	0	0
+SM (OH) C22:1	Relative Quantitative	sphingolipids	sphingolipids	SM (OH)	0.001	0	0
+SM (OH) C22:2	Relative Quantitative	sphingolipids	sphingolipids	SM (OH)	0.008	0	0
+SM (OH) C24:1	Relative Quantitative	sphingolipids	sphingolipids	SM (OH)	0.006	0	0
+SM C16:0	Relative Quantitative	sphingolipids	sphingolipids	SM	0.012	0	0
+SM C16:1	Relative Quantitative	sphingolipids	sphingolipids	SM	0.022	0	0
+SM C18:0	Relative Quantitative	sphingolipids	sphingolipids	SM	0.014	0	0
+SM C18:1	Relative Quantitative	sphingolipids	sphingolipids	SM	0.005	0	0
+SM C24:0	Relative Quantitative	sphingolipids	sphingolipids	SM	0.005	0	0
+SM C24:1	Relative Quantitative	sphingolipids	sphingolipids	SM	0.001	0	0
+H1	Quantitative	sugars	sugars	Total Hexoses	32.7	30000	200
